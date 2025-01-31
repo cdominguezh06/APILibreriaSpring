@@ -6,7 +6,7 @@
 - En Angular tendrás que rehacer todo el modelo para que cuadren los nombres y tipos de los campos con sus contrapartes de Java
 - Las propiedades Autor, Formato, Tema y Edición son objetos, por lo que a la hora de querer mostrarlos en el HTML hay que llamar a "libro.autor.nombre"
 
-### El servicio **LibroService** en Angular quedaría algo así:
+### El servicio **LibrosService** en Angular quedaría algo así:
 ```typescript
 export class LibrosService {
 
