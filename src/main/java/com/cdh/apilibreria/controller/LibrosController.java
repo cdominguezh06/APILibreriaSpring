@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Random;
 
 @CrossOrigin(origins = "*")
 @Controller
@@ -29,9 +30,6 @@ public class LibrosController implements GenericController<Libro> {
     @RequestMapping(path = "/api/libros", method = RequestMethod.POST)
     @Override
     public ResponseEntity<Libro> post(@RequestBody Libro libro) {
-        if (libroRepository.existsById(libro.getId())){
-            return ResponseEntity.badRequest().build();
-        }
         return ResponseEntity.ok(libroRepository.save(libro));
     }
 

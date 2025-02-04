@@ -26,57 +26,57 @@ public class Populators {
     @PostConstruct
     public void populate(){
         // Autores
-        Autor autor1 = new Autor(1, "Stephen King");
+        Autor autor1 = new Autor("Stephen King");
         autorRepository.save(autor1);
-        Autor autor2 = new Autor(2, "J.K. Rowling");
+        Autor autor2 = new Autor("J.K. Rowling");
         autorRepository.save(autor2);
-        Autor autor3 = new Autor(3, "George R.R. Martin");
+        Autor autor3 = new Autor("George R.R. Martin");
         autorRepository.save(autor3);
-        Autor autor4 = new Autor(4, "J.R.R. Tolkien");
+        Autor autor4 = new Autor("J.R.R. Tolkien");
         autorRepository.save(autor4);
-        Autor autor5 = new Autor(5, "Isaac Asimov");
+        Autor autor5 = new Autor("Isaac Asimov");
         autorRepository.save(autor5);
-        Autor autor6 = new Autor(6, "Vegetta777");
+        Autor autor6 = new Autor("Vegetta777");
         autorRepository.save(autor6);
 
         // Temas
-        Temas tema1 = new Temas(1, "Terror");
+        Temas tema1 = new Temas("Terror");
         temasRepository.save(tema1);
-        Temas tema2 = new Temas(2, "Fantasia");
+        Temas tema2 = new Temas("Fantasia");
         temasRepository.save(tema2);
-        Temas tema3 = new Temas(3, "Ciencia Ficcion");
+        Temas tema3 = new Temas("Ciencia Ficcion");
         temasRepository.save(tema3);
-        Temas tema4 = new Temas(4, "Historia");
+        Temas tema4 = new Temas("Historia");
         temasRepository.save(tema4);
-        Temas tema5 = new Temas(5, "Biografia");
+        Temas tema5 = new Temas("Biografia");
         temasRepository.save(tema5);
-        Temas tema6 = new Temas(6, "Novela");
+        Temas tema6 = new Temas("Novela");
         temasRepository.save(tema6);
 
         // Ediciones
-        Edicion edicion1 = new Edicion(1, "Fisico");
+        Edicion edicion1 = new Edicion("Fisico");
         edicionRepository.save(edicion1);
-        Edicion edicion2 = new Edicion(2, "Digital");
+        Edicion edicion2 = new Edicion("Digital");
         edicionRepository.save(edicion2);
 
         // Formatos
-        Formato formato1 = new Formato(1, "Tapa Dura");
+        Formato formato1 = new Formato("Tapa Dura");
         formatoRepository.save(formato1);
-        Formato formato2 = new Formato(2, "Tapa Blanda");
+        Formato formato2 = new Formato("Tapa Blanda");
         formatoRepository.save(formato2);
-        Formato formato3 = new Formato(3, "PDF");
+        Formato formato3 = new Formato("PDF");
         formatoRepository.save(formato3);
-        Formato formato4 = new Formato(4, "ePub");
+        Formato formato4 = new Formato("ePub");
         formatoRepository.save(formato4);
 
         // Libros
-        Libro libro1 = new Libro(1, "It","123456789101D", "TODO", autor1, tema1,19.99, edicion1, formato1,10);
+        Libro libro1 = new Libro("It","123456789101D", "TODO", autor1, tema1,19.99, edicion1, formato1,10);
         librosRepository.save(libro1);
-        Libro libro2 = new Libro(2, "Harry Potter y la piedra filosofal","735125019219A", "piedrafilosofal.png", autor2, tema2,19.99, edicion1, formato1,20);
+        Libro libro2 = new Libro("Harry Potter y la piedra filosofal","735125019219A", "piedrafilosofal.png", autor2, tema2,19.99, edicion1, formato1,20);
         librosRepository.save(libro2);
-        Libro libro3 = new Libro(3, "Harry Potter y la camara secreta","495115914119B", "TODO", autor2, tema2,19.99, edicion1, formato1,9);
+        Libro libro3 = new Libro("Harry Potter y la camara secreta","495115914119B", "TODO", autor2, tema2,19.99, edicion1, formato1,9);
         librosRepository.save(libro3);
-        Libro libro4 = new Libro(4, "Wigetta","995115777188V", "wigetta_portada.png", autor6, tema2,19.99, edicion1, formato1,3);
+        Libro libro4 = new Libro("Wigetta","995115777188V", "wigetta_portada.png", autor6, tema2,19.99, edicion1, formato1,3);
         librosRepository.save(libro4);
     }
 }

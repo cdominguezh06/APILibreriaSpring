@@ -13,6 +13,7 @@ import lombok.NonNull;
 @Entity
 public class Libro {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
     public String nombre;
     @NonNull
@@ -43,4 +44,16 @@ public class Libro {
     public Formato formato;
 
     public int cantidad;
+
+    public Libro(String nombre, @NonNull String ISBN, String imgName, @NonNull Autor autor, @NonNull Temas tema, double precio, @NonNull Edicion edicion, @NonNull Formato formato,  int cantidad) {
+        this.nombre = nombre;
+        this.ISBN = ISBN;
+        this.imgName = imgName;
+        this.autor = autor;
+        this.tema = tema;
+        this.edicion = edicion;
+        this.precio = precio;
+        this.formato = formato;
+        this.cantidad = cantidad;
+    }
 }

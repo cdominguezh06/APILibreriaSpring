@@ -32,6 +32,7 @@ public class AutoresController implements GenericController<Autor> {
         if (autorRepository.existsById(autor.getId())) {
             return ResponseEntity.badRequest().build();
         }
+
         return ResponseEntity.ok(autorRepository.save(autor));
     }
 

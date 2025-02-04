@@ -1,9 +1,7 @@
 package com.cdh.apilibreria.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -15,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Edicion {
     @Id
-    @NonNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NonNull
     private String nombre;
