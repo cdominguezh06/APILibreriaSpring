@@ -72,7 +72,7 @@ public class Populators {
         // Libros
         Libro libro1 = new Libro(1, "It","123456789101D", "TODO", autor1, tema1,19.99, edicion1, formato1,10);
         librosRepository.save(libro1);
-        Libro libro2 = new Libro(2, "Harry Potter y la piedra filosofal","735125019219A", "TODO", autor2, tema2,19.99, edicion1, formato1,20);
+        Libro libro2 = new Libro(2, "Harry Potter y la piedra filosofal","735125019219A", "piedrafilosofal.png", autor2, tema2,19.99, edicion1, formato1,20);
         librosRepository.save(libro2);
         Libro libro3 = new Libro(3, "Harry Potter y la camara secreta","495115914119B", "TODO", autor2, tema2,19.99, edicion1, formato1,9);
         librosRepository.save(libro3);
