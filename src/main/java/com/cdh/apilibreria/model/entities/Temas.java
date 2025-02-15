@@ -1,4 +1,4 @@
-package com.cdh.apilibreria.model;
+package com.cdh.apilibreria.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -6,18 +6,18 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@RequiredArgsConstructor
 @Entity
-public class Autor {
+@Data
+@RequiredArgsConstructor
+@NoArgsConstructor
+public class Temas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NonNull
     private String nombre;
-    @OneToMany(mappedBy = "autor")
+
+    @OneToMany(mappedBy = "tema")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore

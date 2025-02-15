@@ -1,4 +1,4 @@
-package com.cdh.apilibreria.model;
+package com.cdh.apilibreria.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

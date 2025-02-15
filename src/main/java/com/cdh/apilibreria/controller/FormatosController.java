@@ -1,59 +1,49 @@
 package com.cdh.apilibreria.controller;
 
-import com.cdh.apilibreria.model.Formato;
+import com.cdh.apilibreria.model.DTO.FormatoDTO;
+import com.cdh.apilibreria.model.entities.Formato;
 import com.cdh.apilibreria.repository.FormatosRepository;
+import com.cdh.apilibreria.services.FormatosService;
 import com.cdh.apilibreria.unimplemented.controller.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @Controller
-public class FormatosController implements GenericController<Formato> {
+public class FormatosController implements GenericController<FormatoDTO, Integer> {
 
     @Autowired
-    private FormatosRepository formatoRepository;
+    private FormatosService formatosService;
 
-    @RequestMapping(path = "/api/formatos", method = RequestMethod.GET)
-    @Override
-    public ResponseEntity<List<Formato>> get() {
-        return ResponseEntity.ok(formatoRepository.findAll());
+    public FormatosController(FormatosService formatosService) {
+        this.formatosService = formatosService;
     }
 
-    @RequestMapping(path = "/api/formatos", method = RequestMethod.POST)
+    @GetMapping("/api/formatos")
     @Override
-    public ResponseEntity<Formato> post(@RequestBody Formato formato) {
-        if (formatoRepository.existsById(formato.getId())) {
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok(formatoRepository.save(formato));
+    public ResponseEntity<List<FormatoDTO>> get() {
+        return formatosService.get();
     }
 
-    @RequestMapping(path = "/api/formatos", method = RequestMethod.PUT)
+    @PostMapping("/api/formatos")
     @Override
-    public ResponseEntity<Formato> put(@RequestBody Formato formato) {
-        if (formatoRepository.existsById(formato.getId())) {
-            delete(formato.getId());
-            formatoRepository.save(formato);
-            return ResponseEntity.ok(formato);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<FormatoDTO> post(FormatoDTO formatoDTO) {
+        return formatosService.post(formatoDTO);
     }
 
-    @RequestMapping(path = "/api/formatos", method = RequestMethod.DELETE)
+    @PutMapping("/api/formatos")
     @Override
-    public ResponseEntity<Formato> delete(int id) {
-        if (formatoRepository.existsById(id)) {
-            Formato formato = formatoRepository.getReferenceById(id);
-            formatoRepository.delete(formato);
-            return ResponseEntity.ok(formato);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<FormatoDTO> put(FormatoDTO formatoDTO) {
+        return formatosService.put(formatoDTO);
+    }
+
+    @DeleteMapping("/api/formatos")
+    @Override
+    public ResponseEntity<FormatoDTO> delete(Integer id) {
+        return formatosService.delete(id);
     }
 }

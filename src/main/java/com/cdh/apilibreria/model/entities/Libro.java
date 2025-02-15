@@ -1,4 +1,4 @@
-package com.cdh.apilibreria.model;
+package com.cdh.apilibreria.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -18,8 +18,8 @@ public class Libro {
     public String nombre;
     @NonNull
     @JsonProperty("ISBN")
+    @Column(unique = true)
     public String ISBN;
-
     public String imgName;
     @NonNull
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -56,4 +56,5 @@ public class Libro {
         this.formato = formato;
         this.cantidad = cantidad;
     }
+
 }

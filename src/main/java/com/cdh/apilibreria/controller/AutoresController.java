@@ -1,60 +1,47 @@
 package com.cdh.apilibreria.controller;
 
-import com.cdh.apilibreria.model.Autor;
-import com.cdh.apilibreria.repository.AutoresRepository;
+import com.cdh.apilibreria.model.DTO.AutorDTO;
+import com.cdh.apilibreria.services.AutoresService;
 import com.cdh.apilibreria.unimplemented.controller.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @Controller
-public class AutoresController implements GenericController<Autor> {
+public class AutoresController implements GenericController<AutorDTO, Integer> {
 
     @Autowired
-    private AutoresRepository autorRepository;
+    private AutoresService autoresService;
 
-    @RequestMapping(path = "/api/autores", method = RequestMethod.GET)
-    @Override
-    public ResponseEntity<List<Autor>> get() {
-        return ResponseEntity.ok(autorRepository.findAll());
+    public AutoresController(AutoresService autoresService) {
+        this.autoresService = autoresService;
     }
 
-    @RequestMapping(path = "/api/autores", method = RequestMethod.POST)
+    @GetMapping("/api/autores")
     @Override
-    public ResponseEntity<Autor> post(@RequestBody Autor autor) {
-        if (autorRepository.existsById(autor.getId())) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        return ResponseEntity.ok(autorRepository.save(autor));
+    public ResponseEntity<List<AutorDTO>> get() {
+        return autoresService.get();
     }
 
-    @RequestMapping(path = "/api/autores", method = RequestMethod.PUT)
+    @PostMapping("/api/autores")
     @Override
-    public ResponseEntity<Autor> put(@RequestBody Autor autor) {
-        if (autorRepository.existsById(autor.getId())) {
-            delete(autor.getId());
-            autorRepository.save(autor);
-            return ResponseEntity.ok(autor);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<AutorDTO> post(@RequestBody AutorDTO autor) {
+        return autoresService.post(autor);
     }
 
-    @RequestMapping(path = "/api/autores", method = RequestMethod.DELETE)
+    @PutMapping("/api/autores")
     @Override
-    public ResponseEntity<Autor> delete(int id) {
-        if (autorRepository.existsById(id)) {
-            Autor autor = autorRepository.getReferenceById(id);
-            autorRepository.delete(autor);
-            return ResponseEntity.ok(autor);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<AutorDTO> put(@RequestBody AutorDTO autor) {
+        return autoresService.put(autor);
+    }
+
+    @DeleteMapping("/api/autores")
+    @Override
+    public ResponseEntity<AutorDTO> delete(@RequestParam Integer id) {
+        return autoresService.delete(id);
     }
 }

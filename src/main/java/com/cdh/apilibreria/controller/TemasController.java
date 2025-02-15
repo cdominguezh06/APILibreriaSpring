@@ -1,59 +1,44 @@
 package com.cdh.apilibreria.controller;
 
-import com.cdh.apilibreria.model.Temas;
+import com.cdh.apilibreria.model.DTO.TemaDTO;
+import com.cdh.apilibreria.model.entities.Temas;
 import com.cdh.apilibreria.repository.TemasRepository;
+import com.cdh.apilibreria.services.TemasService;
 import com.cdh.apilibreria.unimplemented.controller.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @Controller
-public class TemasController implements GenericController<Temas> {
+public class TemasController implements GenericController<TemaDTO, Integer> {
 
     @Autowired
-    private TemasRepository temaRepository;
+    private TemasService temasService;
 
-    @RequestMapping(path = "/api/temas", method = RequestMethod.GET)
+    @GetMapping("/api/temas")
     @Override
-    public ResponseEntity<List<Temas>> get() {
-        return ResponseEntity.ok(temaRepository.findAll());
+    public ResponseEntity<List<TemaDTO>> get() {
+        return temasService.get();
     }
 
-    @RequestMapping(path = "/api/temas", method = RequestMethod.POST)
+    @PostMapping("/api/temas")
     @Override
-    public ResponseEntity<Temas> post(@RequestBody Temas temas) {
-        if (temaRepository.existsById(temas.getId())) {
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok(temaRepository.save(temas));
+    public ResponseEntity<TemaDTO> post(TemaDTO temaDTO) {
+        return temasService.post(temaDTO);
     }
 
-    @RequestMapping(path = "/api/temas", method = RequestMethod.PUT)
+    @PutMapping("/api/temas")
     @Override
-    public ResponseEntity<Temas> put(@RequestBody Temas temas) {
-        if (temaRepository.existsById(temas.getId())) {
-            delete(temas.getId());
-            temaRepository.save(temas);
-            return ResponseEntity.ok(temas);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<TemaDTO> put(TemaDTO temaDTO) {
+        return temasService.put(temaDTO);
     }
-
-    @RequestMapping(path = "/api/temas", method = RequestMethod.DELETE)
+    @DeleteMapping("/api/temas")
     @Override
-    public ResponseEntity<Temas> delete(int id) {
-        if (temaRepository.existsById(id)) {
-            Temas temas = temaRepository.getReferenceById(id);
-            temaRepository.delete(temas);
-            return ResponseEntity.ok(temas);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<TemaDTO> delete(Integer id) {
+        return temasService.delete(id);
     }
 }

@@ -1,6 +1,6 @@
 package com.cdh.apilibreria.repository;
 
-import com.cdh.apilibreria.model.Temas;
+import com.cdh.apilibreria.model.entities.Temas;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

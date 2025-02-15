@@ -1,5 +1,6 @@
 package com.cdh.apilibreria.model;
 
+import com.cdh.apilibreria.model.entities.*;
 import com.cdh.apilibreria.repository.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -8,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 @ConditionalOnProperty(name = "spring.jpa.hibernate.ddl-auto", havingValue = "create", matchIfMissing = false)
 public class Populators {
-    private LibroRepository librosRepository;
-    private AutoresRepository autorRepository;
-    private TemasRepository temasRepository;
-    private EdicionesRepository edicionRepository;
-    private FormatosRepository formatoRepository;
+    private final LibroRepository librosRepository;
+    private final AutoresRepository autorRepository;
+    private final TemasRepository temasRepository;
+    private final EdicionesRepository edicionRepository;
+    private final FormatosRepository formatoRepository;
 
     public Populators(LibroRepository librosRepository, AutoresRepository autorRepository, TemasRepository temasRepository,
                       EdicionesRepository edicionRepository, FormatosRepository formatoRepository) {
@@ -70,11 +71,11 @@ public class Populators {
         formatoRepository.save(formato4);
 
         // Libros
-        Libro libro1 = new Libro("It","123456789101D", "TODO", autor1, tema1,19.99, edicion1, formato1,10);
+        Libro libro1 = new Libro("It","123456789101D", "it.png", autor1, tema1,19.99, edicion1, formato1,10);
         librosRepository.save(libro1);
         Libro libro2 = new Libro("Harry Potter y la piedra filosofal","735125019219A", "piedrafilosofal.png", autor2, tema2,19.99, edicion1, formato1,20);
         librosRepository.save(libro2);
-        Libro libro3 = new Libro("Harry Potter y la camara secreta","495115914119B", "TODO", autor2, tema2,19.99, edicion1, formato1,9);
+        Libro libro3 = new Libro("Harry Potter y la camara secreta","495115914119B", "camarasecreta.png", autor2, tema2,19.99, edicion1, formato1,9);
         librosRepository.save(libro3);
         Libro libro4 = new Libro("Wigetta","995115777188V", "wigetta_portada.png", autor6, tema2,19.99, edicion1, formato1,3);
         librosRepository.save(libro4);

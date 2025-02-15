@@ -1,7 +1,9 @@
 package com.cdh.apilibreria.controller;
 
-import com.cdh.apilibreria.model.Libro;
+import com.cdh.apilibreria.model.DTO.LibroDTO;
+import com.cdh.apilibreria.model.entities.Libro;
 import com.cdh.apilibreria.repository.LibroRepository;
+import com.cdh.apilibreria.services.LibroService;
 import com.cdh.apilibreria.unimplemented.controller.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,49 +11,39 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Random;
 
 @CrossOrigin(origins = "*")
 @Controller
-public class LibrosController implements GenericController<Libro> {
+public class LibrosController implements GenericController<LibroDTO, String> {
 
     @Autowired
-    private LibroRepository libroRepository;
+    private LibroService libroService;
 
-    @RequestMapping(path = "/api/libros", method = RequestMethod.GET)
-    @ResponseBody
-    @Override
-    public ResponseEntity<List<Libro>> get() {
-        return ResponseEntity.ok(libroRepository.findAll());
-
+    public LibrosController(LibroService libroService) {
+        this.libroService = libroService;
     }
 
-
-    @RequestMapping(path = "/api/libros", method = RequestMethod.POST)
+    @GetMapping("/api/libros")
     @Override
-    public ResponseEntity<Libro> post(@RequestBody Libro libro) {
-        return ResponseEntity.ok(libroRepository.save(libro));
+    public ResponseEntity<List<LibroDTO>> get() {
+        return libroService.get();
     }
 
-    @RequestMapping(path = "/api/libros", method = RequestMethod.PUT)
+    @PostMapping("/api/libros")
     @Override
-    public ResponseEntity<Libro> put(Libro libro) {
-        if (libroRepository.existsById(libro.getId())) {
-            delete(libro.getId());
-            libroRepository.save(libro);
-            return ResponseEntity.ok(libro);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<LibroDTO> post(@RequestBody LibroDTO libro) {
+        return libroService.post(libro);
     }
 
-    @RequestMapping(path = "/api/libros", method = RequestMethod.DELETE)
+    @PutMapping("/api/libros")
     @Override
-    public ResponseEntity<Libro> delete(int id) {
-        if (libroRepository.existsById(id)) {
-            Libro libro = libroRepository.getReferenceById(id);
-            libroRepository.delete(libro);
-            return ResponseEntity.ok(libro);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<LibroDTO> put(@RequestBody LibroDTO libro) {
+        return libroService.put(libro);
+    }
+
+    @DeleteMapping("/api/libros")
+    @Override
+    public ResponseEntity<LibroDTO> delete(@RequestParam String ISBN) {
+       return libroService.delete(ISBN);
     }
 }

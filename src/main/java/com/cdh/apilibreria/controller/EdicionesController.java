@@ -1,59 +1,49 @@
 package com.cdh.apilibreria.controller;
 
-import com.cdh.apilibreria.model.Edicion;
+import com.cdh.apilibreria.model.DTO.EdicionDTO;
+import com.cdh.apilibreria.model.entities.Edicion;
 import com.cdh.apilibreria.repository.EdicionesRepository;
+import com.cdh.apilibreria.services.EdicionesService;
 import com.cdh.apilibreria.unimplemented.controller.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @Controller
-public class EdicionesController implements GenericController<Edicion> {
+public class EdicionesController implements GenericController<EdicionDTO, Integer> {
 
     @Autowired
-    private EdicionesRepository edicionRepository;
+    private EdicionesService edicionService;
 
-    @RequestMapping(path = "/api/ediciones", method = RequestMethod.GET)
-    @Override
-    public ResponseEntity<List<Edicion>> get() {
-        return ResponseEntity.ok(edicionRepository.findAll());
+    public EdicionesController(EdicionesService edicionService) {
+        this.edicionService = edicionService;
     }
 
-    @RequestMapping(path = "/api/ediciones", method = RequestMethod.POST)
+    @GetMapping("/api/ediciones")
     @Override
-    public ResponseEntity<Edicion> post(@RequestBody Edicion edicion) {
-        if (edicionRepository.existsById(edicion.getId())) {
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok(edicionRepository.save(edicion));
+    public ResponseEntity<List<EdicionDTO>> get() {
+        return edicionService.get();
     }
 
-    @RequestMapping(path = "/api/ediciones", method = RequestMethod.PUT)
+    @PostMapping("/api/ediciones")
     @Override
-    public ResponseEntity<Edicion> put(@RequestBody Edicion edicion) {
-        if (edicionRepository.existsById(edicion.getId())) {
-            delete(edicion.getId());
-            edicionRepository.save(edicion);
-            return ResponseEntity.ok(edicion);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<EdicionDTO> post(EdicionDTO edicionDTO) {
+        return edicionService.post(edicionDTO);
     }
 
-    @RequestMapping(path = "/api/ediciones", method = RequestMethod.DELETE)
+    @PutMapping("/api/ediciones")
     @Override
-    public ResponseEntity<Edicion> delete(int id) {
-        if (edicionRepository.existsById(id)) {
-            Edicion edicion = edicionRepository.getReferenceById(id);
-            edicionRepository.delete(edicion);
-            return ResponseEntity.ok(edicion);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<EdicionDTO> put(EdicionDTO edicionDTO) {
+        return edicionService.put(edicionDTO);
+    }
+
+    @DeleteMapping("/api/ediciones")
+    @Override
+    public ResponseEntity<EdicionDTO> delete(Integer id) {
+        return edicionService.delete(id);
     }
 }
