@@ -25,7 +25,6 @@ public class User {
     @Embedded
     private DireccionUsuario direccion;
     @NonNull
-    @JsonIgnore
     private String password;
 
     private UserRole role;
