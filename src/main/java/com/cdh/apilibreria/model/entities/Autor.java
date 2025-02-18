@@ -17,7 +17,7 @@ public class Autor {
     private int id;
     @NonNull
     private String nombre;
-    @OneToMany(mappedBy = "autor")
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.REMOVE)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore

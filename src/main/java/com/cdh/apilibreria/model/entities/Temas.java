@@ -17,7 +17,7 @@ public class Temas {
     @NonNull
     private String nombre;
 
-    @OneToMany(mappedBy = "tema")
+    @OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore

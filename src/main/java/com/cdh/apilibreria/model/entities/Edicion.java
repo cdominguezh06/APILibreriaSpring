@@ -18,7 +18,7 @@ public class Edicion {
     @NonNull
     private String nombre;
 
-    @OneToMany(mappedBy = "edicion")
+    @OneToMany(mappedBy = "edicion", cascade = CascadeType.REMOVE)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore

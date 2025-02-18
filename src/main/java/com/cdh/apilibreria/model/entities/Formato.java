@@ -18,7 +18,7 @@ public class Formato {
     @NonNull
     private String nombre;
 
-    @OneToMany(mappedBy = "formato")
+    @OneToMany(mappedBy = "formato", cascade = CascadeType.REMOVE)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore

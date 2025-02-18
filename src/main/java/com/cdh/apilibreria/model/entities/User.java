@@ -2,7 +2,6 @@ package com.cdh.apilibreria.model.entities;
 
 import com.cdh.apilibreria.model.DireccionUsuario;
 import com.cdh.apilibreria.model.UserRole;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
