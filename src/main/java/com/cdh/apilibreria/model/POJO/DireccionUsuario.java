@@ -1,4 +1,4 @@
-package com.cdh.apilibreria.model;
+package com.cdh.apilibreria.model.POJO;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;

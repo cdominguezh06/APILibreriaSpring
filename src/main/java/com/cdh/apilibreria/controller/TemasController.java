@@ -8,6 +8,7 @@ import com.cdh.apilibreria.unimplemented.controller.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class TemasController implements GenericController<TemaDTO, Integer> {
         return temasService.post(temaDTO);
     }
 
+    @Transactional
     @PutMapping("/api/temas")
     @Override
     public ResponseEntity<TemaDTO> put(TemaDTO temaDTO) {

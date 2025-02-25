@@ -1,4 +1,4 @@
-package com.cdh.apilibreria.model;
+package com.cdh.apilibreria.utiles;
 
 import com.cdh.apilibreria.model.entities.*;
 import com.cdh.apilibreria.repository.*;

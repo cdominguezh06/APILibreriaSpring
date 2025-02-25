@@ -31,9 +31,6 @@ public class EdicionesService {
     }
 
     public ResponseEntity<EdicionDTO> post(EdicionDTO edicion) {
-        if (edicionRepository.existsById(edicion.id())) {
-            return ResponseEntity.badRequest().build();
-        }
         Edicion save = edicionRepository.save(edicionDTOMapper.toEdicion(edicion));
         return ResponseEntity.ok(edicionDTOMapper.toEdicionDTO(save));
     }

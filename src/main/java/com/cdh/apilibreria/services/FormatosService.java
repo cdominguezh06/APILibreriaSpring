@@ -32,9 +32,6 @@ public class FormatosService {
     }
 
     public ResponseEntity<FormatoDTO> post(@RequestBody FormatoDTO formato) {
-        if (formatosRepository.existsById(formato.id())) {
-            return ResponseEntity.badRequest().build();
-        }
         Formato save = formatosRepository.save(formatoDTOMapper.toFormato(formato));
         return ResponseEntity.ok(formatoDTOMapper.toFormatoDTO(save));
     }

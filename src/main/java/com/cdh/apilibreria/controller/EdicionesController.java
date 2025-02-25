@@ -8,6 +8,7 @@ import com.cdh.apilibreria.unimplemented.controller.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class EdicionesController implements GenericController<EdicionDTO, Intege
         return edicionService.post(edicionDTO);
     }
 
+    @Transactional
     @PutMapping("/api/ediciones")
     @Override
     public ResponseEntity<EdicionDTO> put(EdicionDTO edicionDTO) {

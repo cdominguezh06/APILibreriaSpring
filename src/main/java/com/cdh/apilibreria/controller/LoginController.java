@@ -1,5 +1,6 @@
 package com.cdh.apilibreria.controller;
 
+import com.cdh.apilibreria.model.DTO.UserDTO;
 import com.cdh.apilibreria.model.entities.User;
 import com.cdh.apilibreria.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class LoginController {
 
     @Transactional
     @PostMapping(path = "/api/users/login")
-    public ResponseEntity<User> login(@RequestBody User user){
+    public ResponseEntity<UserDTO> login(@RequestBody UserDTO user){
         System.out.println(user);
         return userService.login(user);
     }

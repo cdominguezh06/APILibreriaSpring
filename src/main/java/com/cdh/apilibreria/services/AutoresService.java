@@ -32,16 +32,12 @@ public class AutoresService {
     }
 
     public ResponseEntity<AutorDTO> post(@RequestBody AutorDTO autor) {
-        if (!autorRepository.existsById(autor.id())) {
-            return ResponseEntity.badRequest().build();
-        }
         Autor save = autorRepository.save(autorDTOMapper.toAutor(autor));
         return ResponseEntity.ok(autorDTOMapper.toAutorDTO(save));
     }
 
     public ResponseEntity<AutorDTO> put(@RequestBody AutorDTO autor) {
         if (autorRepository.existsById(autor.id())) {
-            delete(autor.id());
             autorRepository.save(autorDTOMapper.toAutor(autor));
             return ResponseEntity.ok(autor);
         }

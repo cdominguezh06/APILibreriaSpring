@@ -1,12 +1,14 @@
 package com.cdh.apilibreria.model.entities;
 
-import com.cdh.apilibreria.model.DireccionUsuario;
-import com.cdh.apilibreria.model.UserRole;
+import com.cdh.apilibreria.model.POJO.DireccionUsuario;
+import com.cdh.apilibreria.model.POJO.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
+
+import java.util.Arrays;
+import java.util.Set;
 
 @Data
 @Entity
@@ -26,6 +28,17 @@ public class User {
     @NonNull
     private String password;
 
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(
+            name = "user_informacion_pago",
+            joinColumns = @JoinColumn(name = "user_username"),
+            inverseJoinColumns = @JoinColumn(name = "informacion_pago_numero_tarjeta")
+    )
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
+    private Set<InformacionPago> informacionesPago;
+
     private UserRole role;
 
     public User(@NonNull String username, @NonNull String email, @NonNull String password) {
@@ -34,4 +47,9 @@ public class User {
         this.password = password;
         this.role = UserRole.CLIENT;
     }
+
+    public void addInformacionPago(InformacionPago informacionPago) {
+        informacionesPago.add(informacionPago);
+    }
+
 }

@@ -31,9 +31,6 @@ public class TemasService {
     }
 
     public ResponseEntity<TemaDTO> post(TemaDTO temas) {
-        if (temaRepository.existsById(temas.id())) {
-            return ResponseEntity.badRequest().build();
-        }
         Temas save = temaRepository.save(temaDTOMapper.toTema(temas));
         return ResponseEntity.ok(temaDTOMapper.toTemaDTO(save));
     }
