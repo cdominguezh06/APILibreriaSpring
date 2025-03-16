@@ -1,8 +1,6 @@
 package com.cdh.apilibreria.controller;
 
 import com.cdh.apilibreria.model.DTO.EdicionDTO;
-import com.cdh.apilibreria.model.entities.Edicion;
-import com.cdh.apilibreria.repository.EdicionesRepository;
 import com.cdh.apilibreria.services.EdicionesService;
 import com.cdh.apilibreria.unimplemented.controller.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +15,9 @@ import java.util.List;
 @Controller
 public class EdicionesController implements GenericController<EdicionDTO, Integer> {
 
-    @Autowired
-    private EdicionesService edicionService;
+    private final EdicionesService edicionService;
 
+    @Autowired
     public EdicionesController(EdicionesService edicionService) {
         this.edicionService = edicionService;
     }

@@ -3,7 +3,7 @@ package com.cdh.apilibreria.controller;
 import com.cdh.apilibreria.model.DTO.UserDTO;
 import com.cdh.apilibreria.model.entities.User;
 import com.cdh.apilibreria.model.mappers.UserDTOMapper;
-import com.cdh.apilibreria.repository.UserRepository;
+import com.cdh.apilibreria.model.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

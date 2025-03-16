@@ -1,4 +1,4 @@
-package com.cdh.apilibreria.repository;
+package com.cdh.apilibreria.model.repository;
 
 import com.cdh.apilibreria.model.entities.Autor;
 import org.springframework.data.jpa.repository.JpaRepository;

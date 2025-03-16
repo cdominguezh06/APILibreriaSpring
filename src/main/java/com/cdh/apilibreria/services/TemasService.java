@@ -3,7 +3,7 @@ package com.cdh.apilibreria.services;
 import com.cdh.apilibreria.model.DTO.TemaDTO;
 import com.cdh.apilibreria.model.entities.Temas;
 import com.cdh.apilibreria.model.mappers.TemaDTOMapper;
-import com.cdh.apilibreria.repository.TemasRepository;
+import com.cdh.apilibreria.model.repository.TemasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,10 @@ import java.util.List;
 @Service
 public class TemasService {
 
-    @Autowired
-    private TemasRepository temaRepository;
+    private final TemasRepository temaRepository;
+    private final TemaDTOMapper temaDTOMapper;
 
     @Autowired
-    private TemaDTOMapper temaDTOMapper;
-
     public TemasService(TemasRepository temaRepository, TemaDTOMapper temaDTOMapper) {
         this.temaRepository = temaRepository;
         this.temaDTOMapper = temaDTOMapper;
@@ -26,8 +24,8 @@ public class TemasService {
 
     public ResponseEntity<List<TemaDTO>> get() {
         return ResponseEntity.ok(temaRepository.findAll().stream()
-                .map(temas -> temaDTOMapper.toTemaDTO(temas)
-                ).toList());
+                .map(temaDTOMapper::toTemaDTO)
+                .toList());
     }
 
     public ResponseEntity<TemaDTO> post(TemaDTO temas) {
@@ -37,7 +35,6 @@ public class TemasService {
 
     public ResponseEntity<TemaDTO> put(TemaDTO temas) {
         if (temaRepository.existsById(temas.id())) {
-            delete(temas.id());
             temaRepository.save(temaDTOMapper.toTema(temas));
             return ResponseEntity.ok(temas);
         }

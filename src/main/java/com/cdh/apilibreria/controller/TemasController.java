@@ -1,8 +1,6 @@
 package com.cdh.apilibreria.controller;
 
 import com.cdh.apilibreria.model.DTO.TemaDTO;
-import com.cdh.apilibreria.model.entities.Temas;
-import com.cdh.apilibreria.repository.TemasRepository;
 import com.cdh.apilibreria.services.TemasService;
 import com.cdh.apilibreria.unimplemented.controller.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +15,12 @@ import java.util.List;
 @Controller
 public class TemasController implements GenericController<TemaDTO, Integer> {
 
+    private final TemasService temasService;
+
     @Autowired
-    private TemasService temasService;
+    public TemasController(TemasService temasService) {
+        this.temasService = temasService;
+    }
 
     @GetMapping("/api/temas")
     @Override

@@ -15,9 +15,9 @@ import java.util.List;
 @Controller
 public class AutoresController implements GenericController<AutorDTO, Integer> {
 
+    private final AutoresService autoresService;
+    
     @Autowired
-    private AutoresService autoresService;
-
     public AutoresController(AutoresService autoresService) {
         this.autoresService = autoresService;
     }

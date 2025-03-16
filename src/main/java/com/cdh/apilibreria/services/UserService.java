@@ -5,8 +5,8 @@ import com.cdh.apilibreria.model.entities.InformacionPago;
 import com.cdh.apilibreria.model.entities.User;
 import com.cdh.apilibreria.model.mappers.UserDTOMapper;
 import com.cdh.apilibreria.model.mappers.UserDTOMapperImpl;
-import com.cdh.apilibreria.repository.InformacionPagoRepository;
-import com.cdh.apilibreria.repository.UserRepository;
+import com.cdh.apilibreria.model.repository.InformacionPagoRepository;
+import com.cdh.apilibreria.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,12 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private InformacionPagoRepository informacionPagoRepository;
+    private final UserRepository userRepository;
+    private final InformacionPagoRepository informacionPagoRepository;
     @Qualifier("userDTOMapperImpl")
-    @Autowired
-    private UserDTOMapper mapper;
+    private final UserDTOMapper mapper;
 
+    @Autowired
     public UserService(UserRepository userRepository, InformacionPagoRepository informacionPagoRepository, UserDTOMapperImpl mapper) {
         this.userRepository = userRepository;
         this.informacionPagoRepository = informacionPagoRepository;

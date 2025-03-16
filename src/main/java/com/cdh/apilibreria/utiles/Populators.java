@@ -1,7 +1,7 @@
 package com.cdh.apilibreria.utiles;
 
 import com.cdh.apilibreria.model.entities.*;
-import com.cdh.apilibreria.repository.*;
+import com.cdh.apilibreria.model.repository.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;

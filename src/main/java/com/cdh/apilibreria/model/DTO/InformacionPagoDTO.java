@@ -1,4 +1,4 @@
 package com.cdh.apilibreria.model.DTO;
 
-public record InformacionPagoDTO(String numeroTarjeta, String fechaExpiracion, String CVV, String nombreTitular) {
+public record InformacionPagoDTO(String numeroTarjeta, String fechaExpiracion, String cvv, String nombreTitular) {
 }

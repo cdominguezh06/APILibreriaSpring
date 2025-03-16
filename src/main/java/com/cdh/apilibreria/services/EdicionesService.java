@@ -3,7 +3,7 @@ package com.cdh.apilibreria.services;
 import com.cdh.apilibreria.model.DTO.EdicionDTO;
 import com.cdh.apilibreria.model.entities.Edicion;
 import com.cdh.apilibreria.model.mappers.EdicionDTOMapper;
-import com.cdh.apilibreria.repository.EdicionesRepository;
+import com.cdh.apilibreria.model.repository.EdicionesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,10 @@ import java.util.List;
 @Service
 public class EdicionesService {
 
-    @Autowired
-    private EdicionesRepository edicionRepository;
+    private final EdicionesRepository edicionRepository;
+    private final EdicionDTOMapper edicionDTOMapper;
 
     @Autowired
-    private EdicionDTOMapper edicionDTOMapper;
-
     public EdicionesService(EdicionDTOMapper edicionDTOMapper, EdicionesRepository edicionRepository) {
         this.edicionDTOMapper = edicionDTOMapper;
         this.edicionRepository = edicionRepository;
@@ -26,7 +24,7 @@ public class EdicionesService {
 
     public ResponseEntity<List<EdicionDTO>> get() {
         return ResponseEntity.ok(edicionRepository.findAll().stream()
-                .map(edicion -> edicionDTOMapper.toEdicionDTO(edicion))
+                .map(edicionDTOMapper::toEdicionDTO)
                 .toList());
     }
 

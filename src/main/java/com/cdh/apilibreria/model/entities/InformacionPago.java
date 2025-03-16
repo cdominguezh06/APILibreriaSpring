@@ -19,7 +19,7 @@ public class InformacionPago {
     @NonNull
     private String fechaExpiracion;
     @NonNull
-    private String CVV;
+    private String cvv;
     @NonNull
     private String nombreTitular;
 

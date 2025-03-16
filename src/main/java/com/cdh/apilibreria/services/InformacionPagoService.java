@@ -4,8 +4,8 @@ import com.cdh.apilibreria.model.DTO.InformacionPagoDTO;
 import com.cdh.apilibreria.model.entities.InformacionPago;
 import com.cdh.apilibreria.model.entities.User;
 import com.cdh.apilibreria.model.mappers.InformacionPagoDTOMapper;
-import com.cdh.apilibreria.repository.InformacionPagoRepository;
-import com.cdh.apilibreria.repository.UserRepository;
+import com.cdh.apilibreria.model.repository.InformacionPagoRepository;
+import com.cdh.apilibreria.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,15 +15,11 @@ import java.util.List;
 @Service
 public class InformacionPagoService {
 
-    @Autowired
     private final InformacionPagoRepository informacionPagoRepository;
-
-    @Autowired
     private final InformacionPagoDTOMapper informacionPagoDTOMapper;
-
-    @Autowired
     private final UserRepository userRepository;
 
+    @Autowired
     public InformacionPagoService(InformacionPagoRepository informacionPagoRepository, InformacionPagoDTOMapper informacionPagoDTOMapper, UserRepository userRepository) {
         this.informacionPagoRepository = informacionPagoRepository;
         this.informacionPagoDTOMapper = informacionPagoDTOMapper;

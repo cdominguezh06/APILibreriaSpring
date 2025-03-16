@@ -3,7 +3,7 @@ package com.cdh.apilibreria.services;
 import com.cdh.apilibreria.model.DTO.LibroDTO;
 import com.cdh.apilibreria.model.entities.Libro;
 import com.cdh.apilibreria.model.mappers.LibroDTOMapper;
-import com.cdh.apilibreria.repository.LibroRepository;
+import com.cdh.apilibreria.model.repository.LibroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,12 +15,10 @@ import java.util.List;
 @Service
 public class LibroService {
 
-    @Autowired
-    private LibroRepository libroRepository;
+    private final LibroRepository libroRepository;
+    private final LibroDTOMapper libroDTOMapper;
 
     @Autowired
-    private LibroDTOMapper libroDTOMapper;
-
     public LibroService(LibroRepository libroRepository, LibroDTOMapper libroDTOMapper) {
         this.libroRepository = libroRepository;
         this.libroDTOMapper = libroDTOMapper;
@@ -28,22 +26,23 @@ public class LibroService {
 
     public ResponseEntity<List<LibroDTO>> get() {
         return ResponseEntity.ok(libroRepository.findAll().stream()
-                .map(l -> libroDTOMapper.toLibroDTO(l))
+                .map(libroDTOMapper::toLibroDTO)
                 .toList());
 
     }
     @Transactional
-    public ResponseEntity<LibroDTO> post(@RequestBody LibroDTO libro) {
+    public ResponseEntity<LibroDTO> post(LibroDTO libro) {
         Libro save = libroRepository.save(libroDTOMapper.toLibro(libro));
         return ResponseEntity.ok(libroDTOMapper.toLibroDTO(save));
     }
 
     @Transactional
-    public ResponseEntity<LibroDTO> put(@RequestBody LibroDTO libro) {
+    public ResponseEntity<LibroDTO> put(LibroDTO libro) {
         if (libroRepository.existsLibroByISBN(libro.ISBN())) {
-            Libro toPut = libroRepository.findLibroByISBN(libro.ISBN());
-            libroRepository.save(toPut);
-            return ResponseEntity.ok(libroDTOMapper.toLibroDTO(toPut));
+            Libro libro1 = libroDTOMapper.toLibro(libro);
+            libro1.setId(libroRepository.findLibroByISBN(libro.ISBN()).getId());
+            libroRepository.save(libro1);
+            return ResponseEntity.ok(libro);
         }
         System.out.println(libro);
         return ResponseEntity.notFound().build();

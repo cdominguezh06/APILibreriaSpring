@@ -1,8 +1,6 @@
 package com.cdh.apilibreria.controller;
 
 import com.cdh.apilibreria.model.DTO.FormatoDTO;
-import com.cdh.apilibreria.model.entities.Formato;
-import com.cdh.apilibreria.repository.FormatosRepository;
 import com.cdh.apilibreria.services.FormatosService;
 import com.cdh.apilibreria.unimplemented.controller.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +15,9 @@ import java.util.List;
 @Controller
 public class FormatosController implements GenericController<FormatoDTO, Integer> {
 
-    @Autowired
-    private FormatosService formatosService;
+    private final FormatosService formatosService;
 
+    @Autowired
     public FormatosController(FormatosService formatosService) {
         this.formatosService = formatosService;
     }

@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class InformacionPagoController implements GenericController<InformacionPagoDTO, String> {
 
-    @Autowired
     private final InformacionPagoService informacionPagoService;
 
+    @Autowired
     public InformacionPagoController(InformacionPagoService informacionPagoService) {
         this.informacionPagoService = informacionPagoService;
     }
