@@ -60,6 +60,7 @@ public class BuyOrderService {
 
         for (BuyOrderItemDTO itemDTO : buyOrderDTO.buyOrderItems()) {
             Libro libro = libroRepository.findLibroByISBN(itemDTO.libro().ISBN());
+            libro.setCantidad(libro.getCantidad()-itemDTO.cantidad());
             buyOrder.addItem(libro, itemDTO.cantidad());
         }
 
